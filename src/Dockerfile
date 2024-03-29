@@ -5,6 +5,8 @@ FROM python:3.11.0 as base
 ARG PROJECT=src
 ARG TEST=test
 
+RUN apt-get update && apt-get install -y
+
 # Create a non-root user to run the app with.
 RUN groupadd --gid 1000 user && adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
 
