@@ -4,26 +4,15 @@ services:
   unit:
     build:
       context: ..
-      dockerfile: api/Dockerfile
+      dockerfile: src/Dockerfile
       target: test
     volumes:
-      - ../api:/home/user/api
-    environment:
-      - DB_STRING=postgresql://postgres:test@ci_db:5432/postgres
+      - ../src:/home/user/src
 
   integration:
-    depends_on:
-      - ci_db
     build:
       context: ..
-      dockerfile: api/Dockerfile
+      dockerfile: src/Dockerfile
       target: test
     volumes:
-      - ../api:/home/user/api
-    environment:
-      - DB_STRING=postgresql://postgres:test@ci_db:5432/postgres
-
-  ci_db:
-    image: postgres:14.5
-    environment:
-      - POSTGRES_PASSWORD=test
+      - ../src:/home/user/src
