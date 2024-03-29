@@ -18,9 +18,9 @@ USER user
 FROM base as dev
 
 USER root
-# Copy the requirements.txt file and install the Python dependencies.
-COPY --chown=user:user ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the requirements-linux.txt file and install the Python dependencies.
+COPY --chown=user:user ./requirements-linux.txt ./
+RUN pip install --no-cache-dir -r requirements-linux.txt
 # RUN pip install --upgrade llama-index
 
 # Copy the project files into the container.
@@ -39,9 +39,9 @@ CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "
 # Create a new stage named 'test' based on the 'base' stage.
 FROM base as test
 
-# Copy the requirements.txt file and install the Python dependencies.
-COPY --chown=user:user ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the requirements-linux.txt file and install the Python dependencies.
+COPY --chown=user:user ./requirements-linux.txt ./
+RUN pip install --no-cache-dir -r requirements-linux.txt
 # RUN pip install --upgrade llama-index
 
 USER root
